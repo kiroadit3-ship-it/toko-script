@@ -9,7 +9,7 @@ export default function ProductPage() {
           {/* KIRI: Gambar Produk Asli */}
           <div className="relative bg-slate-50 border-b lg:border-b-0 lg:border-r border-slate-100 flex items-center justify-center overflow-hidden">
             <img 
-              src="/produk-banner.png" 
+              src="https://i.postimg.cc/qRVpXYX3/produk-banner.png" 
               alt="Promo Sistem Tabungan Siswa V.2" 
               className="w-full h-full object-cover hover:scale-105 transition-transform duration-700 ease-in-out"
             />
