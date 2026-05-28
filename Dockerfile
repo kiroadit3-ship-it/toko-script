@@ -1,17 +1,18 @@
 # 1. Build Stage
 FROM node:20-alpine AS builder
 WORKDIR /app
+
+# Strategi Cache: Copy package dulu, install dulu
 COPY package*.json ./
 RUN npm install --legacy-peer-deps
+
+# Baru copy source code
 COPY . .
 RUN npm run build
 
-# 2. Production Stage
+# 2. Runner
 FROM node:20-alpine AS runner
 WORKDIR /app
-ENV NODE_ENV=production
-ENV PORT=3000
-
 COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/package.json ./package.json
