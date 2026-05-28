@@ -2,11 +2,20 @@
 FROM node:20-alpine AS builder
 WORKDIR /app
 
-# Strategi Cache: Copy package dulu, install dulu
+# Deklarasi ARG (ini untuk menerima nilai dari luar)
+ARG NEXT_PUBLIC_SUPABASE_URL
+ARG NEXT_PUBLIC_SUPABASE_ANON_KEY
+ARG PAKASIR_PROJECT_SLUG
+ARG PAKASIR_API_KEY
+
+# Set ENV dari ARG (supaya bisa dibaca oleh next build)
+ENV NEXT_PUBLIC_SUPABASE_URL=$NEXT_PUBLIC_SUPABASE_URL
+ENV NEXT_PUBLIC_SUPABASE_ANON_KEY=$NEXT_PUBLIC_SUPABASE_ANON_KEY
+ENV PAKASIR_PROJECT_SLUG=$PAKASIR_PROJECT_SLUG
+ENV PAKASIR_API_KEY=$PAKASIR_API_KEY
+
 COPY package*.json ./
 RUN npm install --legacy-peer-deps
-
-# Baru copy source code
 COPY . .
 RUN npm run build
 
